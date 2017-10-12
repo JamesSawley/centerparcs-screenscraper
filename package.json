@@ -1,0 +1,23 @@
+{
+  "name": "centerparcs-screenscraper",
+  "version": "1.0.0",
+  "description": "Screenscraper to check the prices of a specific lodge in center parcs, so you know if the price has dropped.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sawdust1993/centerparcs-screenscraper.git"
+  },
+  "author": "James Sawley",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/sawdust1993/centerparcs-screenscraper/issues"
+  },
+  "homepage": "https://github.com/sawdust1993/centerparcs-screenscraper#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.83.0"
+  }
+}
