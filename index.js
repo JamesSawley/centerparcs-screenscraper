@@ -69,6 +69,7 @@ page.open("http://reservations.centerparcs.co.uk/", function(status) {
 
     setTimeout(function() {
       /** Page 2 **/
+      /** Wait 5 seconds **/
       console.log("----------------------------")
       console.log('Page 2 loaded ')
       page.render('images/page2_1.png');
@@ -97,6 +98,7 @@ page.open("http://reservations.centerparcs.co.uk/", function(status) {
 
       setTimeout(function() {
         /** Page 3 **/
+        /** Wait 10 seconds **/
         console.log("----------------------------")
         console.log('Page 3 loaded ')
         page.render('images/page3_1.png');
