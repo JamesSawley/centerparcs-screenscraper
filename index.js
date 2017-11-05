@@ -1,4 +1,5 @@
 var page = require("webpage").create();
+var config = require('./config.json');
 
 page.open("http://reservations.centerparcs.co.uk/", function(status) {
 
@@ -103,15 +104,28 @@ page.open("http://reservations.centerparcs.co.uk/", function(status) {
         console.log('Page 3 loaded ')
         page.render('images/page3_1.png');
 
-        page.evaluate(function() {
+        var currentPrice = page.evaluate(function() {
           /** Get price **/
           var currentPrice = document.querySelectorAll(".availCell.requested")[0]
             .childNodes[1]
             .childNodes[1]
             .childNodes[1]
             .innerText.substr(1);
-          console.log("The current price is £" + currentPrice);
+          return currentPrice
         });
+
+        console.log("The current price is £" + currentPrice);
+        if (currentPrice < config.pricePaid) {
+          console.log("Congratulations, you get some discount")
+        } else {
+          console.log("Sorry, it's not cheaper. Try again tomorrow")
+        }
+
+        console.log("----------------------------")
+        console.log("Finishing...")
+        console.log("Exiting phantomjs")
+        phantom.exit();
+
       }, 10000);
     }, 5000);
   }
