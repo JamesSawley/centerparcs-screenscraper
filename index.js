@@ -1,4 +1,5 @@
 var page = require("webpage").create();
+
 page.open("http://reservations.centerparcs.co.uk/", function(status) {
 
   page.onConsoleMessage = function(msg) {
@@ -9,9 +10,13 @@ page.open("http://reservations.centerparcs.co.uk/", function(status) {
     console.log("Page load failed. Exiting phantomjs");
     phantom.exit();
 	} else {
+    console.log("----------------------------")
     console.log("Page loaded: " + page.title);
 
+    page.render('images/page1_1.png');
+
     page.evaluate(function() {
+      /** Page 1 **/
       /** Field 1 - Location - Radio **/
       console.log('Getting location... ')
       var location = document.getElementById("woburnForest");
@@ -53,12 +58,64 @@ page.open("http://reservations.centerparcs.co.uk/", function(status) {
       }
     });
 
-    console.log("----------------------------------");
-    console.log("Script complete. Exiting phantomjs");
-    phantom.exit();
+    page.render('images/page1_2.png');
+
+    page.evaluate(function() {
+      /** Field 5 - Submit page 1 - Button **/
+      var button = document.getElementById("whereWhenFormImageSubmit");
+      button.click();
+      console.log('Submitting page 1... ')
+    });
+
+    setTimeout(function() {
+      /** Page 2 **/
+      console.log("----------------------------")
+      console.log('Page 2 loaded ')
+      page.render('images/page2_1.png');
+
+      page.evaluate(function() {
+        console.log('Getting number of adults... ')
+        var numAdults = document.getElementById("numberAdults1");
+        numAdults.value = "4";
+        console.log(numAdults.value + ' adults')
+
+        var rooms = Math.ceil(numAdults.value / 2);
+        console.log(rooms + " rooms required");
+        var numRooms = document.getElementById("numberBedrooms1");
+        numRooms.value = rooms;
+
+      });
+
+      page.render('images/page2_2.png');
+
+      page.evaluate(function() {
+        /** Field 2 - Submit page 2 - Button **/
+        var button = document.getElementById("submitFormImage");
+        button.click();
+        console.log('Submitting page 2... ')
+      });
+
+      setTimeout(function() {
+        /** Page 3 **/
+        console.log("----------------------------")
+        console.log('Page 3 loaded ')
+        page.render('images/page3_1.png');
+
+        page.evaluate(function() {
+          /** Get price **/
+          var currentPrice = document.querySelectorAll(".availCell.requested")[0]
+            .childNodes[1]
+            .childNodes[1]
+            .childNodes[1]
+            .innerText.substr(1);
+          console.log("The current price is £" + currentPrice);
+        });
+      }, 10000);
+    }, 5000);
   }
   setTimeout(function() {
+    console.log("----------------------------")
     console.log("Timed out. Exiting phantomjs")
     phantom.exit();
-  }, 5000);
+  }, 20000);
 });
