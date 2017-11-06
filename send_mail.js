@@ -1,6 +1,7 @@
 var fs = require('file-system');
 var googleAuth = require('google-auth-library');
 var google = require('googleapis');
+var config = require('./config.json');
 
 function getOAuth2Client(cb) {
   // Load client secrets
@@ -32,14 +33,16 @@ function sendSampleMail(auth, cb) {
 
   var email_lines = [];
 
-  email_lines.push('From: "test" <sawleyjr09@gmail.com>');
-  email_lines.push('To: sawleyjr09@gmail.com');
-  email_lines.push('Content-type: text/html;charset=iso-8859-1');
-  email_lines.push('MIME-Version: 1.0');
-  email_lines.push('Subject: this would be the subject');
+
+  email_lines.push('From: ' + config.mail.from);
+  email_lines.push('To: ' + config.mail.to);
+  email_lines.push('Content-type: ' + config.mail.contentType);
+  email_lines.push('MIME-Version: ' + config.mail.mimeVersion);
+  email_lines.push('Subject: ' + config.mail.subject);
   email_lines.push('');
-  email_lines.push('And this would be the content.<br/>');
-  email_lines.push('The body is in HTML so <b>we could even use bold</b>');
+  config.mail.body.forEach(function(string){
+    email_lines.push(string);
+  });
 
   var email = email_lines.join('\r\n').trim();
 
@@ -55,16 +58,20 @@ function sendSampleMail(auth, cb) {
   }, cb);
 }
 
-getOAuth2Client(function(err, oauth2Client) {
-  if (err) {
-    console.log('err:', err);
-  } else {
-    sendSampleMail(oauth2Client, function(err, results) {
-      if (err) {
-        console.log('err:', err);
-      } else {
-        console.log(results);
-      }
-    });
-  }
-});
+if (config.currentPrice < config.pricePaid) {
+  getOAuth2Client(function(err, oauth2Client) {
+    if (err) {
+      console.log('err:', err);
+    } else {
+      sendSampleMail(oauth2Client, function(err, results) {
+        if (err) {
+          console.log('err:', err);
+        } else {
+          console.log('Mail sent: ', results);
+        }
+      });
+    }
+  });
+} else {
+  console.log('No mail sent');
+}

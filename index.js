@@ -1,5 +1,6 @@
 var page = require("webpage").create();
 var config = require('./config.json');
+var fs = require('fs');
 
 page.open("http://reservations.centerparcs.co.uk/", function(status) {
 
@@ -115,11 +116,13 @@ page.open("http://reservations.centerparcs.co.uk/", function(status) {
         });
 
         console.log("The current price is £" + currentPrice);
-        if (currentPrice < config.pricePaid) {
-          console.log("Congratulations, you get some discount")
-        } else {
-          console.log("Sorry, it's not cheaper. Try again tomorrow")
-        }
+        
+        console.log("Writing to file...")
+        var content = fs.read('config.json');
+        var parseJson = JSON.parse(content);
+        parseJson.currentPrice = +currentPrice;
+        var json = JSON.stringify(parseJson);
+        fs.write('config.json', json, 'w');
 
         console.log("----------------------------")
         console.log("Finishing...")
