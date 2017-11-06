@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/sawdust1993/centerparcs-screenscraper#readme",
   "dependencies": {
+    "file-system": "^2.2.2",
+    "google-auth-library": "^0.11.0",
+    "googleapis": "^22.2.0",
     "phantomjs-prebuilt": "^2.1.16"
   }
 }

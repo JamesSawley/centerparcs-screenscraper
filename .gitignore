@@ -1,5 +1,7 @@
 .DS_Store
-
+gmail-credentials.json
+client_secret.json
+images/
 
 # Logs
 logs
