@@ -43,6 +43,7 @@ function sendSampleMail(auth, cb) {
   config.mail.body.forEach(function(string){
     email_lines.push(string);
   });
+  email_lines.push(config.currentPrice);
 
   var email = email_lines.join('\r\n').trim();
 
@@ -58,20 +59,22 @@ function sendSampleMail(auth, cb) {
   }, cb);
 }
 
-if (config.currentPrice < config.pricePaid) {
-  getOAuth2Client(function(err, oauth2Client) {
-    if (err) {
-      console.log('err:', err);
-    } else {
-      sendSampleMail(oauth2Client, function(err, results) {
-        if (err) {
-          console.log('err:', err);
-        } else {
-          console.log('Mail sent: ', results);
-        }
-      });
-    }
-  });
+if (config.currentPrice !== 0 && config.currentPrice !== undefined && config.currentPrice !== null) {
+  if (config.currentPrice < config.pricePaid) {
+    getOAuth2Client(function(err, oauth2Client) {
+      if (err) {
+        console.log('err:', err);
+      } else {
+        sendSampleMail(oauth2Client, function(err, results) {
+          if (err) {
+            console.log('err:', err);
+          } else {
+            console.log('Mail sent: ', results);
+          }
+        });
+      }
+    });
+  }
 } else {
   console.log('No mail sent');
 }
