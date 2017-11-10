@@ -75,6 +75,7 @@ if (config.currentPrice !== 0 && config.currentPrice !== undefined && config.cur
       }
     });
   }
-} else {
-  console.log('No mail sent');
+  else {
+    console.log('No mail sent');
+  }
 }
