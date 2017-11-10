@@ -1,15 +1,1 @@
-{
-  "pricePaid":400,
-  "currentPrice":300,
-  "mail":{
-    "from":"centerparcs.price.checker@gmail.com",
-    "to":"sawleyjr09@gmail.com",
-    "contentType":"text/html;charset=iso-8859-1",
-    "mimeVersion":"1.0",
-    "subject":"Discount available on Centerparcs lodge!",
-    "body":[
-      "Call Center Parcs bookings on 03448 267723 now to secure the discount.",
-      "You could now pay just £"
-    ]
-  }
-}
+{"pricePaid":400,"currentPrice":329,"selection":{"location":"woburnForest","duration":"midweekID","month":"01 2018"},"location":[{"id":"woburnForest","name":"Whinfell Forest, Cumbria"},{"id":"sherwoodForest","name":"Sherwood Forest, Nottinghamshire"},{"id":"elvedenForest","name":"Elveden Forest, Suffolk"},{"id":"woburnForest","name":"Woburn Forest, Bedfordshire"},{"id":"longleatForest","name":"Longleat Forest, Wiltshire"}],"duration":[{"id":"midweekID","name":"Mid week"},{"id":"weekendID","name":"Weekend"},{"id":"1weekID","name":"1 week"}],"mail":{"from":"centerparcs.price.checker@gmail.com","to":"sawleyjr09@gmail.com","contentType":"text/html;charset=iso-8859-1","mimeVersion":"1.0","subject":"Discount available on Centerparcs lodge!","body":["Call Center Parcs bookings on 03448 267723 now to secure the discount.","You could now pay just £"]}}
