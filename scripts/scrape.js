@@ -34,13 +34,13 @@ page.open("http://reservations.centerparcs.co.uk/", function(status) {
       /** Field 3 - Month - Dropdown **/
       console.log('Getting month... ')
       var month = document.getElementById("dd_selectMonth");
-      month.value = "01 2018";
+      month.value = selection.month;
 
 
       /** Field 4 - Date - Dropdown **/
       console.log('Getting date... ')
       var date = document.getElementById("dd_selectDate");
-      date.value = "29";
+      date.value = selection.day;
 
     }, selection);
 
@@ -60,18 +60,17 @@ page.open("http://reservations.centerparcs.co.uk/", function(status) {
       console.log('Page 2 loaded ')
       page.render('images/page2_1.png');
 
-      page.evaluate(function() {
+      page.evaluate(function(selection) {
         console.log('Getting number of adults... ')
         var numAdults = document.getElementById("numberAdults1");
-        numAdults.value = "4";
-        console.log(numAdults.value + ' adults')
+        numAdults.value = selection.numAdults;
 
         var rooms = Math.ceil(numAdults.value / 2);
         console.log(rooms + " rooms required");
         var numRooms = document.getElementById("numberBedrooms1");
         numRooms.value = rooms;
 
-      });
+      }, selection);
 
       page.render('images/page2_2.png');
 
@@ -111,6 +110,7 @@ page.open("http://reservations.centerparcs.co.uk/", function(status) {
         console.log("----------------------------")
         console.log("Finishing...")
         console.log("Exiting phantomjs")
+        console.log("----------------------------")
         phantom.exit();
 
       }, 10000);
