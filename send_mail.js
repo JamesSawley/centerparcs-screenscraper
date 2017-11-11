@@ -76,6 +76,9 @@ if (config.currentPrice !== 0 && config.currentPrice !== undefined && config.cur
     });
   }
   else {
-    console.log('No mail sent');
+    console.log('Price not cheaper. No mail sent');
   }
+}
+else {
+  console.log('Error finding price. No mail sent');
 }
