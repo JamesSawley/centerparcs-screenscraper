@@ -1,5 +1,5 @@
 var page = require("webpage").create();
-var config = require('../config.json');
+var config = require('../src/config.json');
 var fs = require('fs');
 
 var selection = config.selection;
@@ -101,11 +101,11 @@ page.open("http://reservations.centerparcs.co.uk/", function(status) {
         console.log("The current price is £" + currentPrice);
 
         console.log("Writing to file...")
-        var content = fs.read('config.json');
+        var content = fs.read('src/config.json');
         var parseJson = JSON.parse(content);
         parseJson.currentPrice = +currentPrice;
         var json = JSON.stringify(parseJson);
-        fs.write('config.json', json, 'w');
+        fs.write('src/config.json', json, 'w');
 
         console.log("----------------------------")
         console.log("Finishing...")

@@ -1,7 +1,7 @@
 var fs = require('file-system');
 var googleAuth = require('google-auth-library');
 var google = require('googleapis');
-var config = require('../config.json');
+var config = require('../src/config.json');
 
 function getOAuth2Client(cb) {
   // Load client secrets
