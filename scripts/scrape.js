@@ -1,5 +1,5 @@
 var page = require("webpage").create();
-var config = require('./config.json');
+var config = require('../config.json');
 var fs = require('fs');
 
 var selection = config.selection;

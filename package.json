@@ -6,7 +6,11 @@
   "scripts": {
     "scrape": "node_modules/.bin/phantomjs scrape.js",
     "mail": "node send_mail.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
+    "build": "preact build",
+    "serve": "preact build && preact serve",
+    "dev": "preact watch",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -18,11 +22,26 @@
     "url": "https://github.com/sawdust1993/centerparcs-screenscraper/issues"
   },
   "homepage": "https://github.com/sawdust1993/centerparcs-screenscraper#readme",
+  "eslintConfig": {
+    "extends": "eslint-config-synacor"
+  },
+  "eslintIgnore": [
+    "build/*"
+  ],
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-synacor": "^1.1.0",
+    "if-env": "^1.0.0",
+    "preact-cli": "^2.0.0"
+  },
   "dependencies": {
     "file-system": "^2.2.2",
     "google-auth-library": "^0.11.0",
     "googleapis": "^22.2.0",
     "node-cron": "^1.2.1",
-    "phantomjs-prebuilt": "^2.1.16"
+    "phantomjs-prebuilt": "^2.1.16",
+    "preact": "^8.2.1",
+    "preact-compat": "^3.17.0",
+    "preact-router": "^2.5.5"
   }
 }
