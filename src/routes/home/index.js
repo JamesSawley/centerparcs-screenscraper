@@ -34,13 +34,13 @@ export default class Home extends Component {
 		this.setState({
 			...this.state,
 			form: {},
-			pricePaid: this.state.form.pricePaid,
-			location: this.state.form.location,
-			duration: this.state.form.duration,
-			startDate: this.state.form.startDate,
-			month: this.state.form.month,
-			day: this.state.form.day,
-			numAdults: this.state.form.numAdults
+			pricePaid: (this.state.form.pricePaid === undefined ? this.state.pricePaid : this.state.form.pricePaid),
+			location: (this.state.form.location === undefined ? this.state.location : this.state.form.location),
+			duration: (this.state.form.duration === undefined ? this.state.duration : this.state.form.duration),
+			startDate: (this.state.form.startDate === undefined ? this.state.startDate : this.state.form.startDate),
+			month: (this.state.form.month === undefined ? this.state.month : this.state.form.month),
+			day: (this.state.form.day === undefined ? this.state.day : this.state.form.day),
+			numAdults: (this.state.form.numAdults === undefined ? this.state.numAdults : this.state.form.numAdults)
 		});
 	}
 
@@ -52,6 +52,10 @@ export default class Home extends Component {
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	componentDidMount() {
+		console.log(this.state);
 	}
 
 	render() {
