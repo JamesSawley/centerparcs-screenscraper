@@ -1,6 +1,6 @@
 {
-  "name": "configure-scraper",
-  "short_name": "configure-scraper",
+  "name": "Center Parcs Price Checker",
+  "short_name": "centerparcs",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
