@@ -5,7 +5,7 @@
   "duration": "midweekID",
   "month": "01 2018",
   "day": "29",
-  "numAdults": "4",
+  "numAdults": 4,
 	"mail": {
 		"from": "centerparcs.price.checker@gmail.com",
 		"to": "sawleyjr09@gmail.com",
