@@ -1,0 +1,22 @@
+{
+  "config": {
+    "currentPrice": 329,
+    "pricePaid": 300,
+    "location": "woburnForest",
+    "duration": "midweekID",
+    "month": "01 2018",
+    "day": "29",
+    "numAdults": 4
+  },
+  "mail": {
+    "from": "centerparcs.price.checker@gmail.com",
+    "to": "sawleyjr09@gmail.com",
+    "contentType": "text/html;charset=iso-8859-1",
+    "mimeVersion": "1.0",
+    "subject": "Discount available on Centerparcs lodge!",
+    "body": [
+      "Call Center Parcs bookings on 03448 267723 now to secure the discount.",
+      "You could now pay just £"
+    ]
+  }
+}

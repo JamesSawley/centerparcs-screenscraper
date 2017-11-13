@@ -4,13 +4,14 @@
   "description": "Screenscraper to check the prices of a specific lodge in center parcs, and notify the user if the price has dropped.",
   "main": "index.js",
   "scripts": {
-    "scrape": "node_modules/.bin/phantomjs scrape.js",
-    "mail": "node send_mail.js",
-    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
+		"start": "concurrently \"if-env NODE_ENV=production && npm run -s serve || npm run -s dev\" \"node_modules/.bin/json-server --watch config.json\"",
     "build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
-    "lint": "eslint src"
+    "lint": "eslint src",
+		"scrape": "node_modules/.bin/phantomjs scrape.js",
+    "mail": "node send_mail.js",
+    "json": "node_modules/.bin/json-server --watch src/config.json"
   },
   "repository": {
     "type": "git",
@@ -35,9 +36,11 @@
     "preact-cli": "^2.0.0"
   },
   "dependencies": {
+    "concurrently": "^3.5.0",
     "file-system": "^2.2.2",
     "google-auth-library": "^0.11.0",
     "googleapis": "^22.2.0",
+    "json-server": "^0.12.1",
     "moment": "^2.19.1",
     "node-cron": "^1.2.1",
     "phantomjs-prebuilt": "^2.1.16",

@@ -1,8 +1,8 @@
 var page = require("webpage").create();
-var config = require('../src/config.json');
+var config = require('../config.json');
 var fs = require('fs');
 
-var selection = config.selection;
+var selection = config.config;
 
 page.open("http://reservations.centerparcs.co.uk/", function(status) {
 

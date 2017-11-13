@@ -3,7 +3,7 @@ import moment from 'moment';
 import CurrentConfig from '../../components/currentConfig';
 import DatePicker from '../../components/datePicker';
 import style from './style';
-import config from '../../config.json';
+import config from '../../../config.json';
 
 export default class Home extends Component {
 	handleInputChange(event) {
@@ -34,13 +34,30 @@ export default class Home extends Component {
 		this.setState({
 			...this.state,
 			form: {},
-			pricePaid: (this.state.form.pricePaid === undefined ? this.state.pricePaid : this.state.form.pricePaid),
-			location: (this.state.form.location === undefined ? this.state.location : this.state.form.location),
-			duration: (this.state.form.duration === undefined ? this.state.duration : this.state.form.duration),
-			startDate: (this.state.form.startDate === undefined ? this.state.startDate : this.state.form.startDate),
-			month: (this.state.form.month === undefined ? this.state.month : this.state.form.month),
-			day: (this.state.form.day === undefined ? this.state.day : this.state.form.day),
-			numAdults: (this.state.form.numAdults === undefined ? this.state.numAdults : this.state.form.numAdults)
+			config: {
+				...this.state.config,
+				pricePaid: (this.state.form.pricePaid === undefined ? this.state.config.pricePaid : +this.state.form.pricePaid),
+				location: (this.state.form.location === undefined ? this.state.config.location : this.state.form.location),
+				duration: (this.state.form.duration === undefined ? this.state.config.duration : this.state.form.duration),
+				startDate: (this.state.form.startDate === undefined ? this.state.config.startDate : this.state.form.startDate),
+				month: (this.state.form.month === undefined ? this.state.config.month : this.state.form.month),
+				day: (this.state.form.day === undefined ? this.state.config.day : this.state.form.day),
+				numAdults: (this.state.form.numAdults === undefined ? this.state.config.numAdults : +this.state.form.numAdults)
+			}
+		});
+		//Send data to JSON file
+		fetch('http://localhost:3000/config', {
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			method: 'PUT',
+			body: JSON.stringify(this.state.config)
+		}).then(response => {
+			if (!response.ok) {
+				console.log(response)
+				alert('Submit unsuccessful. Please see console for further details')
+			};
 		});
 	}
 
@@ -54,21 +71,17 @@ export default class Home extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	componentDidMount() {
-		console.log(this.state);
-	}
-
 	render() {
 		return (
 			<div class={style.home}>
 				<CurrentConfig
-					currentPrice={this.state.currentPrice}
-					pricePaid={this.state.pricePaid}
-					location={this.state.location}
-					duration={this.state.duration}
-					day={this.state.day}
-					month={this.state.month}
-					numAdults={this.state.numAdults}
+					currentPrice={this.state.config.currentPrice}
+					pricePaid={this.state.config.pricePaid}
+					location={this.state.config.location}
+					duration={this.state.config.duration}
+					day={this.state.config.day}
+					month={this.state.config.month}
+					numAdults={this.state.config.numAdults}
 				/>
 				<div>
 					<h2>Edit configuration</h2>
