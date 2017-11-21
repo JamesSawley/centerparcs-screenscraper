@@ -1,131 +1,113 @@
-var page = require("webpage").create();
-var config = require('../config.json');
-var fs = require('fs');
+let request = require('request');
+let cheerio = require('cheerio');
 
-var selection = config.config;
+/* Loading the centerparcs search URL. Description on search terms below
+** https://www.centerparcs.co.uk/breaks-we-offer/search.html/2/WO/29-01-2018/4/-/0/4/0/0/0/0/N
+** 2/						???
+** WF/					Forest
+** 29-01-2018/	Start Date
+** 4/						Number of nights
+** -/
+** 0/						???
+** 4/						Adults
+** 0/						Children 6-16
+** 0/						Children 2-5
+** 0/						Children 0-2
+** 0/						Number of dogs
+** N						Accessible Y/N    */
 
-page.open("http://reservations.centerparcs.co.uk/", function(status) {
+let url = 'https://www.centerparcs.co.uk/breaks-we-offer/search.html/2/WO/29-01-2018/4/-/0/4/0/0/0/0/N';
+request(url, function (error, response, html) {
+  if (!error && response.statusCode == 200) {
+		let $ = cheerio.load(html);
 
-  page.onConsoleMessage = function(msg) {
-    console.log(msg);
+		let i = 0;
+		while (i === 0) {
+			if ($('[data-accommodationcode="WL2"]')[0] !== undefined) {
+				i = 1;
+			}
+		}
+
+
+		console.log(
+			$('div.searchresults.aem-GridColumn.aem-GridColumn--default--12')
+			.html()
+		)
+
+		// console.log(
+		// 	$('[data-accommodationcode="WL2"]')[0].html()
+		// )
+
+		// console.log(
+		// 	$('a.btn.btn--book.js-accommodation-from-search-book-now')
+		// 		.children()
+		// 		.html()
+		// )
   }
-
-  if(status !== "success") {
-    console.log("Page load failed. Exiting phantomjs");
-    phantom.exit();
-	} else {
-    console.log("----------------------------")
-    console.log("Page loaded: " + page.title);
-
-    page.render('images/page1_1.png');
-
-    page.evaluate(function(selection) {
-      /** Page 1 **/
-      /** Field 1 - Location - Radio **/
-      console.log('Getting location... ')
-      var location = document.getElementById(selection.location);
-      location.click();
-
-      /** Field 2 - Duration - Radio **/
-      console.log('Getting duration... ')
-      var duration = document.getElementById(selection.duration);
-      duration.click();
-
-      /** Field 3 - Month - Dropdown **/
-      console.log('Getting month... ')
-      var month = document.getElementById("dd_selectMonth");
-      month.value = selection.month;
-
-
-      /** Field 4 - Date - Dropdown **/
-      console.log('Getting date... ')
-      var date = document.getElementById("dd_selectDate");
-      date.value = selection.day;
-
-    }, selection);
-
-    page.render('images/page1_2.png');
-
-    page.evaluate(function() {
-      /** Field 5 - Submit page 1 - Button **/
-      var button = document.getElementById("whereWhenFormImageSubmit");
-      button.click();
-      console.log('Submitting page 1... ')
-    });
-
-    setTimeout(function() {
-      /** Page 2 **/
-      /** Wait 5 seconds **/
-      console.log("----------------------------")
-      console.log('Page 2 loaded ')
-      page.render('images/page2_1.png');
-
-      page.evaluate(function(selection) {
-        console.log('Getting number of adults... ')
-        var numAdults = document.getElementById("numberAdults1");
-        numAdults.value = selection.numAdults;
-
-        var rooms = Math.ceil(numAdults.value / 2);
-        console.log(rooms + " rooms required");
-        var numRooms = document.getElementById("numberBedrooms1");
-        numRooms.value = rooms;
-
-      }, selection);
-
-      page.render('images/page2_2.png');
-
-      page.evaluate(function() {
-        /** Field 2 - Submit page 2 - Button **/
-        var button = document.getElementById("submitFormImage");
-        button.click();
-        console.log('Submitting page 2... ')
-      });
-
-      setTimeout(function() {
-        /** Page 3 **/
-        /** Wait 10 seconds **/
-        console.log("----------------------------")
-        console.log('Page 3 loaded ')
-        page.render('images/page3_1.png');
-
-        var currentPrice = page.evaluate(function() {
-          /** Get price **/
-          var currentPrice = document.querySelectorAll(".availCell.requested")[0]
-            .childNodes[1]
-            .childNodes[1]
-            .childNodes[1]
-            .innerText.substr(1);
-          return currentPrice
-        });
-
-        console.log("The current price is £" + currentPrice);
-
-        console.log("Writing to file...")
-        var content = fs.read('src/config.json');
-        var parseJson = JSON.parse(content);
-        parseJson.currentPrice = +currentPrice;
-        var json = JSON.stringify(parseJson);
-        fs.write('src/config.json', json, 'w');
-
-        console.log("----------------------------")
-        console.log("Finishing...")
-        console.log("Exiting phantomjs")
-        console.log("----------------------------")
-        phantom.exit();
-
-      }, 10000);
-    }, 5000);
-  }
-  setTimeout(function() {
-    console.log("----------------------------")
-    console.log("Timed out. Exiting phantomjs")
-    phantom.exit();
-  }, 20000);
 });
 
-// try {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     setTimeout(function() {
+//       /** Page 3 **/
+//       /** Wait 10 seconds **/
+//       console.log("----------------------------")
+//       console.log('Page 3 loaded ')
+//       page.render('images/page3_1.png');
 //
+//       var currentPrice = page.evaluate(function() {
+//         /** Get price **/
+//         var currentPrice = document.querySelectorAll(".availCell.requested")[0]
+//           .childNodes[1]
+//           .childNodes[1]
+//           .childNodes[1]
+//           .innerText.substr(1);
+//         return currentPrice
+//       });
+//
+//       console.log("The current price is £" + currentPrice);
+//
+//       console.log("Writing to file...")
+//       var content = fs.read('src/config.json');
+//       var parseJson = JSON.parse(content);
+//       parseJson.currentPrice = +currentPrice;
+//       var json = JSON.stringify(parseJson);
+//       fs.write('src/config.json', json, 'w');
+//
+//       console.log("----------------------------")
+//       console.log("Finishing...")
+//       console.log("Exiting phantomjs")
+//       console.log("----------------------------")
+//       phantom.exit();
+//
+//     }, 10000);
+//   }, 5000);
 // }
-// catch(err) {
-//   console.log(err);
-// }
+// 	};
+//
+// 	setTimeout(function() {
+//     console.log("----------------------------")
+//     console.log("Timed out. Exiting phantomjs")
+//     phantom.exit();
+//   }, 5000);
+// });
+//
+// // try {
+// //
+// // }
+// // catch(err) {
+// //   console.log(err);
+// // }

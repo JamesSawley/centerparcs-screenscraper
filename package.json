@@ -4,12 +4,12 @@
   "description": "Screenscraper to check the prices of a specific lodge in center parcs, and notify the user if the price has dropped.",
   "main": "index.js",
   "scripts": {
-		"start": "concurrently \"if-env NODE_ENV=production && npm run -s serve || npm run -s dev\" \"node_modules/.bin/json-server --watch config.json\"",
+    "start": "concurrently \"if-env NODE_ENV=production && npm run -s serve || npm run -s dev\" \"node_modules/.bin/json-server --watch config.json\"",
     "build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "lint": "eslint src",
-		"scrape": "node_modules/.bin/phantomjs scrape.js",
+    "scrape": "node_modules/.bin/phantomjs scripts/scrape.js",
     "mail": "node send_mail.js",
     "json": "node_modules/.bin/json-server --watch src/config.json"
   },
@@ -36,6 +36,7 @@
     "preact-cli": "^2.0.0"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "concurrently": "^3.5.0",
     "file-system": "^2.2.2",
     "google-auth-library": "^0.11.0",
@@ -43,9 +44,11 @@
     "json-server": "^0.12.1",
     "moment": "^2.19.1",
     "node-cron": "^1.2.1",
+    "phantom": "^4.0.8",
     "phantomjs-prebuilt": "^2.1.16",
     "preact": "^8.2.1",
     "preact-compat": "^3.17.0",
-    "preact-router": "^2.5.5"
+    "preact-router": "^2.5.5",
+    "request": "^2.83.0"
   }
 }
