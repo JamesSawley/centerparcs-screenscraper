@@ -1,12 +1,16 @@
 {
   "config": {
-    "currentPrice": 329,
-    "pricePaid": 300,
-    "location": "woburnForest",
-    "duration": "midweekID",
-    "month": "01 2018",
-    "day": "29",
-    "numAdults": 4
+		"currentPrice": 329,
+		"pricePaid": 300,
+		"location": "WO",
+		"date": "29-01-2018",
+		"nights": 4,
+		"adults": 4,
+		"children": 0,
+		"toddlers": 0,
+		"infants": 0,
+		"dogs": 0,
+		"accessible": "N"
   },
   "mail": {
     "from": "centerparcs.price.checker@gmail.com",
