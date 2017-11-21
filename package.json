@@ -49,6 +49,7 @@
     "preact": "^8.2.1",
     "preact-compat": "^3.17.0",
     "preact-router": "^2.5.5",
+    "puppeteer": "^0.13.0",
     "request": "^2.83.0"
   }
 }
