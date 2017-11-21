@@ -1,5 +1,20 @@
 const puppeteer = require('puppeteer');
 
+/* Loading the centerparcs search URL. Description on search terms below
+** https://www.centerparcs.co.uk/breaks-we-offer/search.html/2/WO/29-01-2018/4/-/0/4/0/0/0/0/N
+** 2/						???
+** WF/					Forest
+** 29-01-2018/	Start Date
+** 4/						Number of nights
+** -/
+** 0/						???
+** 4/						Adults
+** 0/						Children 6-16
+** 0/						Children 2-5
+** 0/						Children 0-2
+** 0/						Number of dogs
+** N						Accessible Y/N    */
+
 const url = 'https://www.centerparcs.co.uk/breaks-we-offer/search.html/2/WO/29-01-2018/4/-/0/4/0/0/0/0/N';
 
 (async () => {

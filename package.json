@@ -36,20 +36,16 @@
     "preact-cli": "^2.0.0"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
     "concurrently": "^3.5.0",
     "file-system": "^2.2.2",
     "google-auth-library": "^0.11.0",
     "googleapis": "^22.2.0",
     "json-server": "^0.12.1",
     "moment": "^2.19.1",
-    "node-cron": "^1.2.1",
-    "phantom": "^4.0.8",
     "phantomjs-prebuilt": "^2.1.16",
     "preact": "^8.2.1",
     "preact-compat": "^3.17.0",
     "preact-router": "^2.5.5",
-    "puppeteer": "^0.13.0",
-    "request": "^2.83.0"
+    "puppeteer": "^0.13.0"
   }
 }
