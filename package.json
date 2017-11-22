@@ -9,7 +9,7 @@
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "lint": "eslint src",
-    "scrape": "node_modules/.bin/phantomjs scripts/scrape.js",
+    "scrape": "node scripts/scrape.js",
     "mail": "node send_mail.js",
     "json": "node_modules/.bin/json-server --watch src/config.json"
   },
