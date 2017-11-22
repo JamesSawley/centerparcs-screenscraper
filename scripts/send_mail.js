@@ -62,6 +62,7 @@ function sendSampleMail(auth, cb) {
   }, cb);
 }
 
+console.log('');
 console.log('-------- Section 4 - Send email --------');
 if (config.currentPrice !== 0 && config.currentPrice !== undefined && config.currentPrice !== null) {
   if (config.currentPrice < config.pricePaid) {
@@ -86,3 +87,4 @@ if (config.currentPrice !== 0 && config.currentPrice !== undefined && config.cur
 else {
   console.log('Error finding price. No mail sent');
 }
+console.log('');

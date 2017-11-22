@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const config = require('../config.json').config;
 const fs = require('fs');
 
+console.log('');
 console.log('-------- Section 1 - Construct URL --------');
 /* Loading the centerparcs search URL. Description on search terms below
 ** https://www.centerparcs.co.uk/breaks-we-offer/search.html/2/WO/29-01-2018/4/-/0/4/0/0/0/0/N
@@ -31,6 +32,7 @@ const url = 'https://www.centerparcs.co.uk/breaks-we-offer/search.html/2'
 	+ '/' + config.accessible;
 console.log('... ' + url + ' constructed');
 
+console.log('');
 console.log('-------- Section 2 - Load Chromium --------');
 (async () => {
   const browser = await puppeteer.launch({headless: true});
@@ -52,6 +54,7 @@ console.log('-------- Section 2 - Load Chromium --------');
 	await page.close();
   await browser.close();
 
+	console.log('');
 	console.log('-------- Section 3 - Write to config --------');
 	console.log("... writing to file");
 	const content = fs.readFileSync('config.json');
