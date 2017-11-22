@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Screenscraper to check the prices of a specific lodge in center parcs, and notify the user if the price has dropped.",
   "main": "index.js",
+	"engines": {
+    "node": "8.9.1"
+  },
   "scripts": {
-    "start": "concurrently \"if-env NODE_ENV=production && npm run -s serve || npm run -s dev\" \"node_modules/.bin/json-server --watch config.json\"",
-    "build": "preact build",
+    "start": "node index.js",
+		"configUI": "concurrently \"if-env NODE_ENV=production && npm run -s serve || npm run -s dev\" \"node_modules/.bin/json-server --watch config.json\"",
+		"build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "lint": "eslint src",
