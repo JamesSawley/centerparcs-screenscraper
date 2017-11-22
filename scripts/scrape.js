@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const config = require('../config.json').config;
+const fs = require('fs');
 
 console.log('-------- Section 1 - Construct URL --------');
 /* Loading the centerparcs search URL. Description on search terms below
@@ -48,6 +49,16 @@ console.log('-------- Section 2 - Load Chromium --------');
 	})
 	console.log('Current Price: £' + price);
 
-	await page.close()
+	await page.close();
   await browser.close();
+
+	console.log('-------- Section 3 - Write to config --------');
+	console.log("... writing to file");
+	const content = fs.readFileSync('config.json');
+  const parseJson = JSON.parse(content);
+  parseJson.config.currentPrice = +price;
+  const json = JSON.stringify(parseJson);
+	fs.writeFileSync('config.json', json);
+	console.log('... done');
+
 })();
