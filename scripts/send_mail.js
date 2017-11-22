@@ -62,29 +62,33 @@ function sendSampleMail(auth, cb) {
   }, cb);
 }
 
-console.log('');
-console.log('-------- Section 4 - Send email --------');
-if (config.currentPrice !== 0 && config.currentPrice !== undefined && config.currentPrice !== null) {
-  if (config.currentPrice < config.pricePaid) {
-    getOAuth2Client(function(err, oauth2Client) {
-      if (err) {
-        console.log('err:', err);
-      } else {
-        sendSampleMail(oauth2Client, function(err, results) {
-          if (err) {
-            console.log('err:', err);
-          } else {
-            console.log('Mail sent: ', results);
-          }
-        });
-      }
-    });
-  }
-  else {
-    console.log('Price not cheaper. No mail sent');
-  }
-}
-else {
-  console.log('Error finding price. No mail sent');
-}
-console.log('');
+const sendMail = () => {
+	console.log('');
+	console.log('-------- Section 4 - Send email --------');
+	if (config.currentPrice !== 0 && config.currentPrice !== undefined && config.currentPrice !== null) {
+	  if (config.currentPrice < config.pricePaid) {
+	    getOAuth2Client(function(err, oauth2Client) {
+	      if (err) {
+	        console.log('err:', err);
+	      } else {
+	        sendSampleMail(oauth2Client, function(err, results) {
+	          if (err) {
+	            console.log('err:', err);
+	          } else {
+	            console.log('Mail sent: ', results);
+	          }
+	        });
+	      }
+	    });
+	  }
+	  else {
+	    console.log('Price not cheaper. No mail sent');
+	  }
+	}
+	else {
+	  console.log('Error finding price. No mail sent');
+	}
+	console.log('');
+};
+
+module.exports = sendMail;
