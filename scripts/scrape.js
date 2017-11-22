@@ -32,13 +32,13 @@ console.log('... ' + url + ' constructed');
 
 console.log('-------- Section 2 - Load Chromium --------');
 (async () => {
-  const browser = await puppeteer.launch({headless: false});
+  const browser = await puppeteer.launch({headless: true});
   const page = await browser.newPage();
 	console.log('... loading page');
   await page.goto(url, {timeout: 60000});
 	console.log('... page loaded');
 	console.log('... waiting for selector');
-	page.waitForSelector('[data-accommodationcode="WL2"]', { visible: true })
+	await page.waitFor('[data-accommodationcode="WL2"]');
 	console.log('... taking screenshot 2');
   await page.screenshot({path: 'images/page-load-2.png'});
 	console.log('... finding price');
@@ -50,6 +50,4 @@ console.log('-------- Section 2 - Load Chromium --------');
 
 	await page.close()
   await browser.close();
-
-	return price;
 })();
