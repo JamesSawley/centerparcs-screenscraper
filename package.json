@@ -13,8 +13,7 @@
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "lint": "eslint src",
-    "scrape": "node scripts/scrape.js",
-    "mail": "node scripts/send_mail.js",
+    "scrape": "node index.js",
     "json": "node_modules/.bin/json-server --watch src/config.json"
   },
   "repository": {
