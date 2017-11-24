@@ -3,3 +3,25 @@
 	min-height: 100%;
 	width: 100%;
 }
+
+label {
+	display: block;
+	margin: 5px;
+	/*width: 100%;*/
+}
+
+input {
+	left: 200px;
+	position: absolute;
+	width: 200px;
+}
+
+select {
+	position: absolute;
+	left: 200px;
+}
+
+DatePicker {
+	position: absolute;
+	top: 0;
+}
