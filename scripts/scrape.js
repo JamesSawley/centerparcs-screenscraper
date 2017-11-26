@@ -1,8 +1,17 @@
 const puppeteer = require('puppeteer');
-const config = require('../config.json').config;
+const json = require('../config.json');
 const fs = require('fs');
+const _quit = require('../helpers')
+
+let config = json.config;
+let skip = false;
 
 module.exports = scrape = (async () => {
+	process.on('unhandledRejection', (reason, p) => {
+	  console.log('Unhandled Rejection at:', p, 'reason:', reason);
+	  // application specific logging, throwing an error, or other logic here
+	});
+
 	console.log('');
 	console.log('-------- Section 1 - Construct URL --------');
 	/* Loading the centerparcs search URL. Description on search terms below
@@ -37,13 +46,30 @@ module.exports = scrape = (async () => {
 	console.log('-------- Section 2 - Load Chromium --------');
   const browser = await puppeteer.launch({headless: true});
   const page = await browser.newPage();
+
 	console.log('... loading page');
-  await page.goto(url, {timeout: 60000});
+	try {
+		await page.goto(url, {timeout: 60000});
+	} catch(err) {
+		console.log("(1) Error loading page. Please try again later." );
+		_quit();
+		await page.close();
+	  await browser.close();
+		return;
+	}
 	console.log('... page loaded');
+
 	console.log('... waiting for selector');
-	await page.waitFor('[data-accommodationcode="WL2"]');
-	console.log('... taking screenshot 2');
-  await page.screenshot({path: 'images/page-load-2.png'});
+	try {
+		await page.waitFor('[data-accommodationcode="WL2"]');
+	} catch(err) {
+		console.log("(2) Error finding accomodation. It's likely that you have inputted the wrong search criteria. Please check and try again. If this problem persists then there are no available lodges." );
+		_quit();
+		await page.close();
+	  await browser.close();
+		return;
+	}
+
 	console.log('... finding price');
 	const price = await page.evaluate(() => {
 		const el = document.querySelector('[data-accommodationcode="WL2"]').getAttribute('data-price');
@@ -57,10 +83,17 @@ module.exports = scrape = (async () => {
 	console.log('');
 	console.log('-------- Section 3 - Write to config --------');
 	console.log("... writing to file");
-	const content = fs.readFileSync('config.json');
-  const parseJson = JSON.parse(content);
-  parseJson.config.currentPrice = +price;
-  const json = JSON.stringify(parseJson);
-	fs.writeFileSync('config.json', json);
+	try {
+		const content = fs.readFileSync('config.json');
+	  const parseJson = JSON.parse(content);
+	  parseJson.config.currentPrice = +price;
+		parseJson.ui.skip = skip;
+	  const json = JSON.stringify(parseJson);
+		fs.writeFileSync('config.json', json);
+	} catch(err) {
+		console.log("(4) Error writing price to file. Please try again later." );
+		_quit();
+		return;
+	}
 	console.log('... done');
 });
