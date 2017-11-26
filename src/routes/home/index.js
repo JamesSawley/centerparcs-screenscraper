@@ -42,6 +42,7 @@ export default class Home extends Component {
 				location: (this.state.form.location === undefined ? this.state.config.location : this.state.form.location),
 				date: (this.state.form.date === undefined ? this.state.config.date : this._date(this.state.form.date)),
 				nights: (this.state.form.nights === undefined ? this.state.config.nights : +this.state.form.nights),
+				lodge: (this.state.form.lodge === undefined ? this.state.config.lodge : this.state.form.lodge),
 				adults: (this.state.form.adults === undefined ? this.state.config.adults : +this.state.form.adults),
 				children: (this.state.form.children === undefined ? this.state.config.children : +this.state.form.children),
 				toddlers: (this.state.form.toddlers === undefined ? this.state.config.toddlers : +this.state.form.toddlers),
@@ -85,6 +86,7 @@ export default class Home extends Component {
 					location={this.state.config.location}
 					date={this.state.config.date}
 					nights={this.state.config.nights}
+					lodge={this.state.config.lodge}
 					adults={this.state.config.adults}
 					children={this.state.config.children}
 					toddlers={this.state.config.toddlers}
@@ -123,6 +125,23 @@ export default class Home extends Component {
 				            <option value="4">4</option>
 				            <option value="7">7</option>
 			            </select>
+							  </label>
+								<label>
+							    Lodge type:
+									<select value={this.state.form.lodge} name="lodge" onChange={this.handleInputChange}>
+				            <option value="HR1T">1 bedroom Executive twin hotel room</option>
+				            <option value="HR1D">1 bedroom Executive double hotel room</option>
+										<option value="XS1T">1 bedroom Executive Apartment, twin</option>
+										<option value="XS1">1 bedroom Executive Apartment, double</option>
+										<option value="WL2">2 bedroom Woodland Lodge</option>
+										<option value="XL2">2 bedroom Executive Lodge</option>
+										<option value="WL3">3 bedroom woodland lodge</option>
+										<option value="XL3">3 bedroom executive lodge</option>
+										<option value="WL4">4 bedroom woodland lodge</option>
+										<option value="XL42">4 bedroom executive lodge</option>
+										<option value="XL4U">4 bedroom Executive Lodge with split-level layout</option>
+										<option value="ZL4G">4 bedroom Exclusive Lodge with outdoor spa area</option>
+									</select>
 							  </label>
 								<label>
 							    Number of Adults:

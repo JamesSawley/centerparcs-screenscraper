@@ -9,7 +9,6 @@ let skip = false;
 module.exports = scrape = (async () => {
 	process.on('unhandledRejection', (reason, p) => {
 	  console.log('Unhandled Rejection at:', p, 'reason:', reason);
-	  // application specific logging, throwing an error, or other logic here
 	});
 
 	console.log('');
@@ -49,7 +48,7 @@ module.exports = scrape = (async () => {
 
 	console.log('... loading page');
 	try {
-		await page.goto(url, {timeout: 60000});
+		await page.goto(url);
 	} catch(err) {
 		console.log("(1) Error loading page. Please try again later." );
 		_quit();
@@ -61,7 +60,7 @@ module.exports = scrape = (async () => {
 
 	console.log('... waiting for selector');
 	try {
-		await page.waitFor('[data-accommodationcode="WL2"]');
+		await page.waitFor('[data-accommodationcode="' + config.lodge + '"]');
 	} catch(err) {
 		console.log("(2) Error finding accomodation. It's likely that you have inputted the wrong search criteria. Please check and try again. If this problem persists then there are no available lodges." );
 		_quit();
@@ -71,10 +70,10 @@ module.exports = scrape = (async () => {
 	}
 
 	console.log('... finding price');
-	const price = await page.evaluate(() => {
-		const el = document.querySelector('[data-accommodationcode="WL2"]').getAttribute('data-price');
+	const price = await page.evaluate((config) => {
+		const el = document.querySelector('[data-accommodationcode="' + config.lodge + '"]').getAttribute('data-price');
 		return el;
-	})
+	}, config)
 	console.log('Current Price: £' + price);
 
 	await page.close();
