@@ -5,5 +5,3 @@
 node_modules/
 
 sendgrid.env
-
-src/

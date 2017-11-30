@@ -8,14 +8,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "configUI": "concurrently \"if-env NODE_ENV=production && npm run -s serve || npm run -s dev\" \"node_modules/.bin/json-server --watch config.json\"",
-    "build": "preact build",
-    "serve": "preact build && preact serve",
-    "dev": "preact watch",
-    "lint": "eslint src",
-    "scrape": "node index.js",
-    "mail": "node scripts/send_mail.js",
-    "json": "node_modules/.bin/json-server --watch src/config.json"
+    "mail": "node scripts/send_mail.js"
   },
   "repository": {
     "type": "git",
@@ -41,17 +34,9 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^6.1.4",
-    "concurrently": "^3.5.0",
     "file-system": "^2.2.2",
-    "google-auth-library": "^0.11.0",
-    "googleapis": "^22.2.0",
-    "json-server": "^0.12.1",
     "moment": "^2.19.1",
     "node-schedule": "^1.2.5",
-    "phantomjs-prebuilt": "^2.1.16",
-    "preact": "^8.2.1",
-    "preact-compat": "^3.17.0",
-    "preact-router": "^2.5.5",
     "puppeteer": "^0.13.0"
   }
 }
