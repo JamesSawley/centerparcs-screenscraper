@@ -1,11 +1,7 @@
 .DS_Store
-gmail-credentials.json
-client_secret.json
-/images
 
 /build
 /*.log
 node_modules/
 
-secret.json
 sendgrid.env
