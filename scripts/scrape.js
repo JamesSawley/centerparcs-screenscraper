@@ -43,7 +43,9 @@ module.exports = scrape = (async () => {
 
 	console.log('');
 	console.log('-------- Section 2 - Load Chromium --------');
-  const browser = await puppeteer.launch({headless: true});
+  const browser = await puppeteer.launch({
+  	args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
   const page = await browser.newPage();
 
 	console.log('... loading page');
