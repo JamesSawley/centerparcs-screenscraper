@@ -10,7 +10,7 @@ var schedule = require('node-schedule');
 //
 // var j = schedule.scheduleJob(rule, function(){
 	(async () => {
-		await scrape();
+		// await scrape();
 		if (!skip) {
 			await mail();
 		}

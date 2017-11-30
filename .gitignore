@@ -6,3 +6,6 @@ client_secret.json
 /build
 /*.log
 node_modules/
+
+secret.json
+sendgrid.env
