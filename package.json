@@ -15,23 +15,11 @@
     "url": "git+https://github.com/sawdust1993/centerparcs-screenscraper.git"
   },
   "author": "James Sawley",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sawdust1993/centerparcs-screenscraper/issues"
   },
   "homepage": "https://github.com/sawdust1993/centerparcs-screenscraper#readme",
-  "eslintConfig": {
-    "extends": "eslint-config-synacor"
-  },
-  "eslintIgnore": [
-    "build/*"
-  ],
-  "devDependencies": {
-    "eslint": "^4.5.0",
-    "eslint-config-synacor": "^1.1.0",
-    "if-env": "^1.0.0",
-    "preact-cli": "^2.0.0"
-  },
   "dependencies": {
     "@sendgrid/mail": "^6.1.4",
     "file-system": "^2.2.2",
