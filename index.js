@@ -4,9 +4,20 @@ const json = require('./config.json');
 const schedule = require('node-schedule');
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = [0];
-// rule.minute = [0, 15, 30, 45];
-// rule.minute = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59];
+
+switch(process.argv[2]) {
+	case 'hour':
+    rule.minute = [0];
+		break;
+	case 'quarter':
+    rule.minute = [0, 15, 30, 45];
+		break;
+	case 'minute':
+	  rule.minute = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59];
+		break;
+	default:
+    rule.minute = [0];
+}
 
 var j = schedule.scheduleJob(rule, function(){
 	json.config.map((el, index) => {
