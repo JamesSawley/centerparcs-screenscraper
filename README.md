@@ -95,7 +95,18 @@ Complete the following in centerparcs-screenscraper/config.json. If you want to 
 * skip
 
 ## Run it locally
-`npm start` does the job :ok_hand:.
+By default the app runs hourly. If you want to change this you can choose either once every 15 minutes or once per minute. Simply modify the Procfile:
+```
+worker: npm start hour     //once per hour (default)
+worker: npm start quarter  //once every 15 minutes
+worker: npm start five     //once every 5 minutes
+worker: npm start minute   //once a minute
+```
+
+You can run the app locally by using the start script :ok_hand::
+```
+npm start
+```
 
 ## Deploy it.
 ```
@@ -103,7 +114,7 @@ git push heroku master
 ```
 
 ## What happens now?
-Once Heroku has built and deployed the application, the app will scan the Centerparcs website on the hour, every hour. If the price it finds is cheaper than the price you paid, then it will send you an email.
+Once Heroku has built and deployed the application, the app will scan the Centerparcs website in the frequency you have specified. If the price it finds is cheaper than the price you paid, then it will send you an email.
 
 Note: It's your responsibility to contact centerparcs to get the cheaper price. 
 
