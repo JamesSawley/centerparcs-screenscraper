@@ -36,7 +36,8 @@ This repo is for people who have a 'come back soon' deal on Centerparcs, but are
 7. Congratulate yourself. That's the hard bit done.
 
 ## Personalise your configuration
-Complete the following:
+Complete the following in centerparcs-screenscraper/config.json. If you want to run multiple instances of the price checker, simply add another object into the config array...
+
 * email - where do you want the notification to go?
 
 * pricePaid - how much did you pay?
@@ -110,4 +111,4 @@ Note: It's your responsibility to contact centerparcs to get the cheaper price.
 All contributions welcome. Feel free to fork and improve however you'd like.
 
 ## License
-[MIT]()
+[MIT](https://github.com/sawdust1993/centerparcs-screenscraper/blob/master/LICENSE)
