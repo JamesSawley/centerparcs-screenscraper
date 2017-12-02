@@ -1,18 +1,19 @@
 const puppeteer = require('puppeteer');
 const json = require('../config.json');
 const fs = require('fs');
-const _quit = require('../helpers')
+const _quit = require('../helpers');
 
-let config = json.config;
-let skip = false;
+module.exports = scrape = (async (i) => {
 
-module.exports = scrape = (async () => {
+	let config = json.config[i];
+	let skip = false;
+
 	process.on('unhandledRejection', (reason, p) => {
 	  console.log('Unhandled Rejection at:', p, 'reason:', reason);
 	});
 
 	console.log('');
-	console.log('-------- Section 1 - Construct URL --------');
+	console.log(`${i + 1}: -------- Section 1 - Construct URL --------`);
 	/* Loading the centerparcs search URL. Description on search terms below
 	** https://www.centerparcs.co.uk/breaks-we-offer/search.html/2/WO/29-01-2018/4/-/0/4/0/0/0/0/N
 	** 2/						???
@@ -39,62 +40,62 @@ module.exports = scrape = (async () => {
 		+ '/' + config.infants
 		+ '/' + config.dogs
 		+ '/' + config.accessible;
-	console.log('... ' + url + ' constructed');
+	console.log(`${i + 1}: ... ` + url + ' constructed');
 
 	console.log('');
-	console.log('-------- Section 2 - Load Chromium --------');
+	console.log(`${i + 1}: -------- Section 2 - Load Chromium --------`);
   const browser = await puppeteer.launch({
   	args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   const page = await browser.newPage();
 
-	console.log('... loading page');
+	console.log(`${i + 1}: ... loading page`);
 	try {
 		await page.goto(url);
 	} catch(err) {
-		console.log("(1) Error loading page. Please try again later." );
-		_quit();
+		console.log(`${i + 1}: (1) Error loading page. Please try again later.`);
+		_quit(i);
 		await page.close();
 	  await browser.close();
 		return;
 	}
-	console.log('... page loaded');
+	console.log(`${i + 1}: ... page loaded`);
 
-	console.log('... waiting for selector');
+	console.log(`${i + 1}: ... waiting for selector`);
 	try {
 		await page.waitFor('[data-accommodationcode="' + config.lodge + '"]');
 	} catch(err) {
-		console.log("(2) Error finding accomodation. It's likely that you have inputted the wrong search criteria. Please check and try again. If this problem persists then there are no available lodges." );
-		_quit();
+		console.log(`${i + 1}: (2) Error finding accomodation. It's likely that you have inputted the wrong search criteria. Please check and try again. If this problem persists then there are no available lodges.`);
+		_quit(i);
 		await page.close();
 	  await browser.close();
 		return;
 	}
 
-	console.log('... finding price');
+	console.log(`${i + 1}: ... finding price`);
 	const price = await page.evaluate((config) => {
 		const el = document.querySelector('[data-accommodationcode="' + config.lodge + '"]').getAttribute('data-price');
 		return el;
 	}, config)
-	console.log('Current Price: £' + price);
+	console.log(`${i + 1}: Current Price: £` + price);
 
 	await page.close();
   await browser.close();
 
 	console.log('');
-	console.log('-------- Section 3 - Write to config --------');
-	console.log("... writing to file");
+	console.log(`${i + 1}: -------- Section 3 - Write to config --------`);
+	console.log(`${i + 1}: ... writing to file`);
 	try {
 		const content = fs.readFileSync('config.json');
 	  const parseJson = JSON.parse(content);
-	  parseJson.config.currentPrice = +price;
-		parseJson.ui.skip = skip;
+	  parseJson.config[i].currentPrice = +price;
+		parseJson.config[i].skip = skip;
 	  const json = JSON.stringify(parseJson);
 		await fs.writeFileSync('config.json', json);
 	} catch(err) {
-		console.log("(4) Error writing price to file. Please try again later." );
-		_quit();
+		console.log(`${i + 1}: (4) Error writing price to file. Please try again later.`);
+		_quit(i);
 		return;
 	}
-	console.log('... done');
+	console.log(`${i + 1}: ... done`);
 });

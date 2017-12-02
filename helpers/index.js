@@ -1,9 +1,9 @@
 const fs = require('fs');
 
-module.exports = _quit = () => {
+module.exports = _quit = (i) => {
 	const content = fs.readFileSync('config.json');
 	const parseJson = JSON.parse(content);
-	parseJson.ui.skip = true;
+	parseJson.config[i].skip = true;
 	const json = JSON.stringify(parseJson);
 	fs.writeFileSync('config.json', json);
 }
