@@ -103,9 +103,9 @@ worker: npm start five     //once every 5 minutes
 worker: npm start minute   //once a minute
 ```
 
-You can run the app locally by using the start script :ok_hand::
+You can run the app locally by using the start script (don't forget to specify the interval) :ok_hand::
 ```
-npm start
+npm start minute
 ```
 
 ## Deploy it.
