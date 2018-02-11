@@ -1,29 +1,29 @@
 {
-  "name": "centerparcs-screenscraper",
-  "version": "1.0.0",
-  "description": "Screenscraper to check the prices of a specific lodge in center parcs, and notify the user if the price has dropped.",
-  "main": "index.js",
-  "engines": {
-    "node": "8.9.1"
-  },
-  "scripts": {
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sawdust1993/centerparcs-screenscraper.git"
-  },
-  "author": "James Sawley",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sawdust1993/centerparcs-screenscraper/issues"
-  },
-  "homepage": "https://github.com/sawdust1993/centerparcs-screenscraper#readme",
-  "dependencies": {
-    "@sendgrid/mail": "^6.1.4",
-    "file-system": "^2.2.2",
-    "moment": "^2.19.1",
-    "node-schedule": "^1.2.5",
-    "puppeteer": "^0.13.0"
-  }
+	"name": "centerparcs-screenscraper",
+	"version": "1.0.0",
+	"description": "Screenscraper to check the prices of a specific lodge in center parcs, and notify the user if the price has dropped.",
+	"main": "index.js",
+	"engines": {
+		"node": "8.9.1"
+	},
+	"scripts": {
+		"start": "node index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sawdust1993/centerparcs-screenscraper.git"
+	},
+	"author": "James Sawley",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/sawdust1993/centerparcs-screenscraper/issues"
+	},
+	"homepage": "https://github.com/sawdust1993/centerparcs-screenscraper#readme",
+	"dependencies": {
+		"file-system": "^2.2.2",
+		"moment": "^2.19.1",
+		"node-notifier": "^5.2.1",
+		"node-schedule": "^1.2.5",
+		"puppeteer": "^0.13.0"
+	}
 }

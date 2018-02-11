@@ -1,44 +1,27 @@
 # centerparcs-screenscraper
-This repo is for people who have a 'come back soon' deal on Centerparcs, but are too lazy to check the site everyday. There is a little upfront effort required, but once you've configured this node.js app, you can sit back and wait for the savings to come rolling in :pound: :pound: :pound:.
+This repo is for people who have a 'come back soon' deal on Centerparcs, but are too lazy to check the site everyday. Once you've configured this to run in your terminal, you can sit back and wait for the savings to come rolling in :pound: :pound: :pound:.
 
 ## Installation
-1. Create a [Heroku](https://www.heroku.com/) account if you don't have one already.
 
-2. Install the Heroku cli and login
-   ```
-   npm install -g heroku-cli
-   heroku login
-   ```
-   
-2. Clone the repo:
+1. Clone the repo:
    ```
    git clone https://github.com/sawdust1993/centerparcs-screenscraper.git
    cd centerparcs-screenscraper
    ```
-   
-3. Create a new app on Heroku.
-   ```
-   heroku create <APP_NAME>
-   ```
-   where <APP_NAME> is whatever you want it to be.
-   
-4. Add puppeteer build pack
-   ```
-   heroku buildpacks:set https://github.com/jontewks/puppeteer-heroku-buildpack -a <APP_NAME>
-   ```
-5. Provision SendMail by following the instructions on ['Provisioning the add-on'](https://devcenter.heroku.com/articles/sendgrid#provisioning-the-add-on), ['Obtaining an API key'](https://devcenter.heroku.com/articles/sendgrid#obtaining-an-api-key) and ['Setup API key environment variable'](https://devcenter.heroku.com/articles/sendgrid#setup-api-key-environment-variable). Make sure to edit the config vars on your app’s settings tab on the Dashboard.
 
-6. Install dependencies
+2. Install dependencies
    ```
    npm install
    ```
-   
-7. Congratulate yourself. That's the hard bit done.
 
-## Personalise your configuration
+3. Go and make a brew, it'll be finished when you get back.
+
+4. [Personalise your configuration](#personalise)
+
+5. [Run it](#run).
+
+## Personalise your configuration <a name="personalise"></a>
 Complete the following in centerparcs-screenscraper/config.json. If you want to run multiple instances of the price checker, simply add another object into the config array...
-
-* email - where do you want the notification to go?
 
 * pricePaid - how much did you pay?
 
@@ -70,7 +53,7 @@ Complete the following in centerparcs-screenscraper/config.json. If you want to 
   "XL42" | 4 bedroom executive lodge
   "XL4U" | 4 bedroom Executive Lodge with split-level layout
   "ZL4G" | 4 bedroom Exclusive Lodge with outdoor spa area
-                              
+
 * nights - How many nights are you staying?
 
 * adults - How many adults (16+)?
@@ -94,32 +77,22 @@ Complete the following in centerparcs-screenscraper/config.json. If you want to 
 * currentPrice
 * skip
 
-## Run it locally
-By default the app runs hourly. If you want to change this you can choose either once every 15 minutes or once per minute. Simply modify the Procfile:
+## Run it <a name="run"></a>
+By default the app runs hourly... you can change this if you like :ok_hand::
 ```
-worker: npm start hour     //once per hour (default)
-worker: npm start quarter  //once every 15 minutes
-worker: npm start five     //once every 5 minutes
-worker: npm start minute   //once a minute
-```
-
-You can run the app locally by using the start script (don't forget to specify the interval) :ok_hand::
-```
-npm start minute
-```
-
-## Deploy it.
-```
-git push heroku master
+npm start     	   //once per hour (default)
+npm start quarter  //once every 15 minutes
+npm start five     //once every 5 minutes
+npm start minute   //once a minute
 ```
 
 ## What happens now?
-Once Heroku has built and deployed the application, the app will scan the Centerparcs website in the frequency you have specified. If the price it finds is cheaper than the price you paid, then it will send you an email.
+The app will scan the Centerparcs website in the frequency you have specified. If the price it finds is cheaper than the price you paid, then it will notify you.
 
-Note: It's your responsibility to contact centerparcs to get the cheaper price. 
+Note: It's your responsibility to contact centerparcs to get the cheaper price.
 
 ## Contributions
-All contributions welcome. Feel free to fork and improve however you'd like.
+Feel free to fork and improve however you'd like.
 
 ## License
 [MIT](https://github.com/sawdust1993/centerparcs-screenscraper/blob/master/LICENSE)
