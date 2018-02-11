@@ -25,10 +25,10 @@ switch(process.argv[2]) {
 
 let config = json.config;
 
-var j = schedule.scheduleJob(rule, function(){
+// var j = schedule.scheduleJob(rule, function(){
 	json.config.map((el, index) => {
 		(async (el, i) => {
-			await scrape(i);
+			// await scrape(i);s
 			config = JSON.parse(fs.readFileSync('config.json')).config;
 			if (!config[i].skip &&
 				config[i].currentPrice < config[i].pricePaid) {
@@ -41,4 +41,4 @@ var j = schedule.scheduleJob(rule, function(){
 			}
 		})(el, index).catch(console.log.bind(console));
 	});
-});
+// });
