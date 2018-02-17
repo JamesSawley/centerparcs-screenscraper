@@ -78,9 +78,10 @@ Complete the following in centerparcs-screenscraper/config.json. If you want to 
 * skip
 
 ## Run it <a name="run"></a>
-By default the app runs hourly... you can change this if you like :ok_hand::
+By default the app runs just once... you can change this and run it on a schedule if you like :ok_hand::
 ```
-npm start     	   //once per hour (default)
+npm start     	   //just once (default)
+npm start hour     //once per hour
 npm start quarter  //once every 15 minutes
 npm start five     //once every 5 minutes
 npm start minute   //once a minute
