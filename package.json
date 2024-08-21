@@ -20,10 +20,10 @@
 	},
 	"homepage": "https://github.com/sawdust1993/centerparcs-screenscraper#readme",
 	"dependencies": {
-		"file-system": "^2.2.2",
+		"file-system": "^1.2.2",
 		"moment": "^2.19.1",
-		"node-notifier": "^5.2.1",
+		"node-notifier": "^10.0.1",
 		"node-schedule": "^1.2.5",
-		"puppeteer": "^0.13.0"
+		"puppeteer": "^23.1.1"
 	}
 }
