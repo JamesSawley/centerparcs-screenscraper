@@ -20,22 +20,22 @@ module.exports = scrape = (async (i) => {
 	});
 
 	/* Loading the centerparcs search URL. Description on search terms below
-	** https://www.centerparcs.co.uk/breaks-we-offer/search.html/2/WO/29-01-2018/4/-/0/4/0/0/0/0/N
+	** https://www.centerparcs.co.uk/breaks-we-offer/search.html/2/LF/03-03-2025/4/-/-/3/5/0/0/1/0/N
 	** 2/						???
 	** WF/					Forest
 	** 29-01-2018/	Start Date
 	** 4/						Number of nights
 	** -/						???
-	** 0/						???
+	** -/						???
+	** 3/						Number of bedrooms
 	** 4/						Adults
 	** 0/						Children 6-16
 	** 0/						Children 2-5
 	** 0/						Children 0-2
 	** 0/						Number of dogs
 	** N						Accessible Y/N    */
-	const url = 'https://www.centerparcs.co.uk/breaks-we-offer/search.html/2' + '/' + config.location + '/' + config.date + '/' + config.nights + '/' + '-' + '/' + 0 + '/' + config.adults + '/' + config.children + '/' + config.toddlers + '/' + config.infants + '/' + config.dogs + '/' + config.accessible;
-
-	console.log(`${i + 1}: Loading browser...`);
+	const url = 'https://www.centerparcs.co.uk/breaks-we-offer/search.html/2' + '/' + config.location + '/' + config.date + '/' + config.nights + '/-/-/' + config.numberOfBedrooms + '/' + config.adults + '/' + config.children + '/' + config.toddlers + '/' + config.infants + '/' + config.dogs + '/' + config.accessible;
+	console.log(`${i + 1}: Loading browser... ${url}`);
 	const browser = await puppeteer.launch({
 		args: ['--no-sandbox', '--disable-setuid-sandbox'],
 		headless: true
@@ -53,9 +53,17 @@ module.exports = scrape = (async (i) => {
 		return;
 	}
 
+	try {
+		// Dismiss cookie handler if required
+		await page
+			.locator('#onetrust-accept-btn-handler')
+			.setTimeout(3000)
+			.click()
+	} catch {}
+
 	console.log(`${i + 1}: ... waiting for selector`);
 	try {
-		await page.waitFor('[data-accommodationcode="' + config.lodge + '"]');
+		await page.locator('[data-accommodationcode="' + config.lodge + '"]').waitHandle();
 	} catch (err) {
 		console.log(`${i + 1}: Error finding accomodation. It's likely that you have inputted the wrong search criteria. Please check and try again. If this problem persists then there are no available lodges.`);
 		_quit(i);
