@@ -85,7 +85,7 @@ module.exports = scrape = (async (i) => {
 		const parseJson = JSON.parse(content);
 		parseJson.config[i].currentPrice = + price;
 		parseJson.config[i].skip = skip;
-		const json = JSON.stringify(parseJson);
+		const json = JSON.stringify(parseJson, null, 2);
 		await fs.writeFileSync('config.json', json);
 	} catch (err) {
 		console.log(`${i + 1}: Error writing price to file. Please try again later.`);
